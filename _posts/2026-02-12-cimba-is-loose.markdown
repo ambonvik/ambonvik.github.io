@@ -25,13 +25,14 @@ event simulation before now.
 
 This speed advantage translates directly to increased resolution in experiments. For 
 example, if one is able to run 10 replications of a particular scenario in SimPy within a 
-certain budget for time and computing resources, Cimba can run 450. All else equal, this 
-tightens the confidence intervals on the result by a factor of about 8. With few 
-samples ($n < 30$), one needs to use the $t$-distribution to construct a 
-confidence interval. For $n = 10$, this gives a critical value of $t^*$ = 2.26 for a 95 % 
-confidence level, while a larger sample can use the critical value $Z_{\alpha/2}$ = 1.96. 
-Together with the increased degrees of freedom, this gives a confidence interval 
-width ratio of
+certain budget for time and computing resources, Cimba can run 450. 
+
+All else equal, this tightens the confidence intervals on the result by a factor of 
+nearly 8. With few samples ($n < 30$), one needs to use the $t$-distribution to construct 
+a confidence interval. For $n = 10$, this gives a critical value of $t^*$ = 2.26 for a 
+95 % confidence level, while a larger sample can use the critical value 
+$Z_{\alpha/2}$ = 1.96. Together with the increased degrees of freedom, this gives a 
+confidence interval width ratio of
 
 $$ r = \frac{\frac{2.262}{\sqrt{10}}}{\frac{1.960}{\sqrt{450}}} = 7.7$$
 
