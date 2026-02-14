@@ -14,7 +14,7 @@ $header-font-family: "Inter", $global-font-family;
 $monospace-font-family: "JetBrains Mono", "Roboto Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
 
 // Tighten up line spacing
-$line-height: 1.45
+$line-height: 1.45;
 
 @charset "utf-8";
 
@@ -37,4 +37,15 @@ $line-height: 1.45
     .page__content {
         font-size: 0.9em;
     }
+}
+
+/* Force footer icons to use the correct weight for Solid icons */
+.page__footer-follow .social-icons .fas {
+  font-family: "Font Awesome 5 Free" !important;
+  font-weight: 900 !important;
+}
+
+/* Ensure Brands (GitHub/LinkedIn) use the Brands font-family */
+.page__footer-follow .social-icons .fab {
+  font-family: "Font Awesome 5 Brands" !important;
 }

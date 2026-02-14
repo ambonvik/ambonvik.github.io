@@ -139,7 +139,7 @@ footer:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/ambonvik"
     - label: "Website"
-      icon: "fab fa-fw fa-globe"
+      icon: "fas fa-fw fa-globe"
       url: "https://cimba.readthedocs.io/en/latest/index.html"
   since: "2025"
 
