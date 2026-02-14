@@ -11,11 +11,10 @@ header:
 ---
 My [discrete event simulation library Cimba 3.0](https://github.com/ambonvik/cimba), 
 written in C, was released as a public beta on GitHub on December 27, 2025. Following 
-discussions both on [Hacker News](https://news.ycombinator.com/item?id=46872818) and 
-[Reddit](https://www.reddit.com/r/OperationsResearch/comments/1r0aiir/cimba_open_source_discrete_event_simulation/), 
+discussions both on [Hacker News](https://news.ycombinator.com/item?id=46872818) and [Reddit](https://www.reddit.com/r/OperationsResearch/comments/1r0aiir/cimba_open_source_discrete_event_simulation/), 
 Cimba has already collected more than 60 GitHub stars in its first few weeks in public.
 
-The headline advantage of Cimba is its speed compared to similar tools, where SimPy 
+The headline advantage of Cimba is its speed compared to similar tools. SimPy 
 with its interpreted Python base language is the most direct comparison. As one 
 perhaps would expect from a library of compiled C and assembly code, 
 [Cimba runs about 45 times faster than a comparable model in SimPy](https://cimba.readthedocs.io/en/latest/background.html#benchmarking-cimba-against-simpy). 
@@ -27,7 +26,7 @@ This speed advantage translates directly to increased resolution in experiments.
 example, if one is able to run 10 replications of a particular scenario in SimPy within a 
 certain budget for time and computing resources, Cimba can run 450. 
 
-All else equal, this tightens the confidence intervals on the result by a factor of 
+All else equal, this will tighten the confidence intervals on the result by a factor of 
 nearly 8. With few samples ($n < 30$), one needs to use the $t$-distribution to construct 
 a confidence interval. For $n = 10$, this gives a critical value of $t^*$ = 2.26 for a 
 95 % confidence level, while a larger sample can use the critical value 
@@ -44,40 +43,45 @@ variables, passed as arguments, returned by functions, and so on. Processes can 
 and destroy other processes as needed, and handle other processes as if they were 
 passive objects in the model.
 
-One can build models where, e.g., queuing 
-customers are opinionated agents that balk, renege, and jockey about in the queues, 
-while being created by the arrival process, served by the service process, and 
-destroyed by the departure process as any passive object would. One example can be 
-found in the [Cimba tutorial](https://cimba.readthedocs.io/en/latest/tutorial.html#agents-balking-reneging-and-jockeying-in-queues).
+With Cimba, one can build models where, e.g., queuing customers are opinionated agents 
+that balk, renege, and jockey about in the queues. These ornery customer-agents can be 
+created by the arrival process, served by the service process, and destroyed by the 
+departure process as any passive object would. One example can be found in the 
+[Cimba tutorial](https://cimba.readthedocs.io/en/latest/tutorial.html#agents-balking-reneging-and-jockeying-in-queues). 
 
-In addition, early users have pointed out the more powerful logging features and the 
-native use of C debuggers as major advantages to understand in detail what is 
+In addition, early users have pointed out the powerful logging features and the 
+native integration with C debuggers as major advantages to understand in detail what is 
 going on in a model.
 
 It is well known that object-oriented programming was invented with Simula67 as a 
 natural way of organizing a simulation model. One might think that building simulation 
 models with C as the base language, without explicit support for object-orientation in 
-the language itself, might be a disadvantage. In fact, it is not. Object-orientation 
-is a design pattern, not a language feature. Cimba uses object-oriented design 
-wherever that is the most natural way of structuring the design. For example, the 
+the language itself might be a disadvantage. In fact, it is not. 
+
+Object-orientation is a design pattern, not a language feature. Cimba uses object-oriented 
+design wherever that is the most natural way of structuring the design. For example, the 
 processes are subclasses of the coroutine class, and the user model can derive 
-subclasses of processes where needed. At the same time, it does not force the user to 
-apply object-oriented design where it is *not* appropriate. Cimba's pseudo-random 
-number generators are not objects, just functions to be called. This avoids writing 
-unnecessary "object-oriented" boilerplate code when it is not the right tool for the job.
+subclasses of processes where needed. 
+
+At the same time, it does not force the user to apply object-oriented design where it is 
+*not* appropriate. Cimba's pseudo-random number generators are not objects, just functions 
+to be called. Conceptually, the entropy is part of the simulated universe, not a 
+thing one carries around. This avoids writing unnecessary "object-oriented" boilerplate 
+code when it is not the right tool for the job.
 
 In some areas, Cimba is even approaching a functional programming paradigm. Our 
 processes can pass an explicit demand function as a waiting criterion to order a 
 wakeup call whenever that function evaluates as true. This is exposed to the user in 
 the condition variable class, and is an implicit part of all other resource and queue 
-classes (where the demand function is pre-packaged internally). Combined with a 
-similar feature for priority queue ordering functions, this gives great flexibility to 
-the user model, while providing simple pre-packaged resources and queues for the 
-typical cases.
+classes (where the demand function is pre-packaged internally).
+
+Combined with a similar feature for custom priority queue ordering functions, this gives 
+great flexibility to the user model, while providing simple pre-packaged resources and 
+queues for the typical cases.
 
 I'm biased, of course, but I think Cimba turned out pretty good. You can find the code on 
 [GitHub](https://github.com/ambonvik/cimba) and the documentation on 
 [ReadTheDocs](https://cimba.readthedocs.io/en/latest/index.html).
 
-In our next post, we will discuss how the 45x speed advantage translates into 
+In the next post, we will discuss how the 45x speed advantage translates into 
 statistical power and experimental resolution.
