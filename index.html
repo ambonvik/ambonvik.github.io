@@ -1,0 +1,36 @@
+---
+layout: archive
+author_profile: true
+entries_layout: "grid"
+show_excerpts: true
+---
+<div class="list__wrapper">
+  {% for post in paginator.posts %}
+  <article class="archive__item" style="display: flex; align-items: flex-start; margin-bottom: 2em; clear: both;">
+
+    {% if post.header.teaser %}
+    <div class="archive__item-teaser" style="flex: 0 0 200px; margin-right: 20px;">
+      <img src="{{ post.header.teaser | relative_url }}" alt="{{ post.title }}" style="width: 100%; border-radius: 4px;">
+    </div>
+    {% endif %}
+
+    <div class="archive__item-body" style="flex: 1;">
+      <h2 class="archive__item-title" style="margin-top: 0;">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h2>
+      {% if post.excerpt %}
+      <div class="archive__item-excerpt">
+        {% if post.description %}
+          {{ post.description | markdownify }}
+        {% else %}
+          {{ post.excerpt | markdownify | truncatewords: 30 }}
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+  </article>
+  {% endfor %}
+</div>
+
+{% include paginator.html %}
