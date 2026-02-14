@@ -18,3 +18,10 @@ search: false
 .archive__item-body {
     overflow: hidden;
 }
+
+@media (min-width: 64em) {
+    .archive__item-excerpt,
+    .page__content {
+        font-size: 0.9em;
+    }
+}
