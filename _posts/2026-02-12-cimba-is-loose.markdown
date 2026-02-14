@@ -32,6 +32,7 @@ confidence interval. For $n = 10$, this gives a critical value of $t^*$ = 2.26 f
 confidence level, while a larger sample can use the critical value $Z_{\alpha/2}$ = 1.96. 
 Together with the increased degrees of freedom, this gives a confidence interval 
 width ratio of
+
 $$ r = \frac{\frac{2.262}{\sqrt{10}}}{\frac{1.960}{\sqrt{450}}} = 7.7$$
 
 The other main advantage is one of model expressivity. Cimba is based on simulated 
