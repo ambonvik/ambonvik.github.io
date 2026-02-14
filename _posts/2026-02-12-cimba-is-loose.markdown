@@ -42,10 +42,12 @@ process to yield and resume control from any level of its call stack. The proces
 are first-class citizens of the language and can be created at runtime, assigned to 
 variables, passed as arguments, returned by functions, and so on. Processes can create 
 and destroy other processes as needed, and handle other processes as if they were 
-passive objects in the model. One can build models where, e.g., queuing 
+passive objects in the model.
+
+One can build models where, e.g., queuing 
 customers are opinionated agents that balk, renege, and jockey about in the queues, 
 while being created by the arrival process, served by the service process, and 
-destroyed by the departure process as any passive object would. One exaple can be 
+destroyed by the departure process as any passive object would. One example can be 
 found in the [Cimba tutorial](https://cimba.readthedocs.io/en/latest/tutorial.html#agents-balking-reneging-and-jockeying-in-queues).
 
 In addition, early users have pointed out the more powerful logging features and the 
