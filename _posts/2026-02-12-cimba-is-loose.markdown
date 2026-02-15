@@ -56,7 +56,7 @@ departure process as any passive object would. One example can be found in the
 You can find a detailed discussion of Cimba's 
 [asymmetric stackful coroutines in the documentation](https://cimba.readthedocs.io/en/latest/background.html#coroutines-revisited).
 
-### Object-oriented design. In C. And assembly.
+### Object-oriented design. In C.
 
 It is well known that object-oriented programming was invented with Simula67 as a 
 natural way of organizing a simulation model. One might think that building simulation 
