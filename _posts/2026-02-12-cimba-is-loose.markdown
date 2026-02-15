@@ -14,6 +14,8 @@ written in C, was released as a public beta on GitHub on December 27, 2025. Foll
 discussions both on [Hacker News](https://news.ycombinator.com/item?id=46872818) and [Reddit](https://www.reddit.com/r/OperationsResearch/comments/1r0aiir/cimba_open_source_discrete_event_simulation/), 
 Cimba has already collected more than 60 GitHub stars in its first few weeks in public.
 
+### Speed and model expressivity
+
 The headline advantage of Cimba is its speed compared to similar tools. SimPy 
 with its interpreted Python base language is the most direct comparison. As one 
 perhaps would expect from a library of compiled C and assembly code, 
@@ -49,9 +51,10 @@ created by the arrival process, served by the service process, and destroyed by 
 departure process as any passive object would. One example can be found in the 
 [Cimba tutorial](https://cimba.readthedocs.io/en/latest/tutorial.html#agents-balking-reneging-and-jockeying-in-queues). 
 
-In addition, early users have pointed out the powerful logging features and the 
-native integration with C debuggers as major advantages to understand in detail what is 
-going on in a model.
+You can find a detailed discussion of Cimba's 
+[asymmetric stackful coroutines in the documentation](https://cimba.readthedocs.io/en/latest/background.html#coroutines-revisited).
+
+### Object-oriented design. In C. And assembly.
 
 It is well known that object-oriented programming was invented with Simula67 as a 
 natural way of organizing a simulation model. One might think that building simulation 
@@ -77,7 +80,12 @@ classes (where the demand function is pre-packaged internally).
 
 Combined with a similar feature for custom priority queue ordering functions, this gives 
 great flexibility to the user model, while providing simple pre-packaged resources and 
-queues for the typical cases.
+queues for the typical cases. The fact that the base language does not force a 
+one-size-fits-all object-oriented design pattern may even be an advantage. Again, you can 
+find 
+[a more detailed discussion in the documentation](https://cimba.readthedocs.io/en/latest/background.html#object-oriented-programming-in-c-and-assembly).
+
+***
 
 I'm biased, of course, but I think Cimba turned out pretty good. You can find the code on 
 [GitHub](https://github.com/ambonvik/cimba) and the documentation on 
