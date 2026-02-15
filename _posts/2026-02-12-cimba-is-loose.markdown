@@ -14,7 +14,7 @@ written in C, was released as a public beta on GitHub on December 27, 2025. Foll
 discussions both on [Hacker News](https://news.ycombinator.com/item?id=46872818) and [Reddit](https://www.reddit.com/r/OperationsResearch/comments/1r0aiir/cimba_open_source_discrete_event_simulation/), 
 Cimba has already collected more than 60 GitHub stars in its first few weeks in public.
 
-### Speed and model expressivity
+### The C speed advantage over interpreted code
 
 The headline advantage of Cimba is its speed compared to similar tools. SimPy 
 with its interpreted Python base language is the most direct comparison. As one 
@@ -36,6 +36,8 @@ $Z_{\alpha/2}$ = 1.96. Together with the increased degrees of freedom, this give
 confidence interval width ratio of
 
 $$ r = \frac{\frac{2.262}{\sqrt{10}}}{\frac{1.960}{\sqrt{450}}} = 7.7$$
+
+### Processes as asymmetric stackful coroutines
 
 The other main advantage is one of model expressivity. Cimba is based on simulated 
 processes as stackful asymmetric coroutines. That makes it possible for a simulated 
