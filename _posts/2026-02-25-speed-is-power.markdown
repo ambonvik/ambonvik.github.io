@@ -129,7 +129,7 @@ benchmarking discrete event simulation models in C using the Cimba library again
 equivalent models in Python using SimPy and Python Multiprocessing. The increased 
 statistical power follows from that.
 
-One might argue that "well, but we have so much more computing power now, so we can 
+One might argue that "Well, but we have so much more computing power now, so we can 
 afford to be inefficient and slow." I beg to differ. Analysts (and their clients) will 
 always try to include more realistic model features up to a point where computing 
 speed becomes a constraint. For example, in my models from around 1990, we modeled 
