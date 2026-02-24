@@ -134,8 +134,8 @@ One might argue that "Well, but we have so much more computing power now, so we 
 afford to be inefficient and slow." I beg to differ. Analysts (and their clients) will 
 always try to include more realistic model features up to a point where computing 
 speed becomes a constraint. For example, in my models from around 1990, we modeled 
-airborne sensors as simple pie slices moving in two-dimensional airspace. What if one 
-wanted higher realism, e.g., to model the dynamic three-dimensional sensor coverage 
+airborne sensor coverage as simple pie slices moving in two-dimensional airspace. What if 
+one wanted higher realism, e.g., to model the dynamic three-dimensional sensor coverage 
 from a maneuvering plane and the sensor cones from any approaching missiles, too? And 
 perhaps replace my simple non-linear resource allocation model with something much 
 more sophisticated for a more realistic representation of the human decision maker? 
