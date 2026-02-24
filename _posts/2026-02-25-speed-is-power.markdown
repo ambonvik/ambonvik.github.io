@@ -21,7 +21,7 @@ a non-linear resource allocation model for prioritization between different poss
 mission types given the current state of the simulated combat inside one of these models. 
 This represented the decisions of a human air commander, while an actual Air Vice Marshal 
 was looking over my shoulder sharing helpful and specific advice like "Hey! I 
-wouldn't have done _that!_" (Afterward, I also found out that having one's Master's 
+wouldn't have done _that!_" (Later, I also found out that having one's Master's 
 thesis classified for reasons of national security is somewhat inconvenient for later 
 career reference.)
 
