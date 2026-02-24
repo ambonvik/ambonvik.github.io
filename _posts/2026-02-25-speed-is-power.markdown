@@ -97,7 +97,7 @@ true differences from the null hypothesis.
 ![binomial_power.png](../assets/images/binomial_power.png)
 
 This one is seriously underpowered. Note that a wide area between 0.5 and 0.75 has 
-less probability of recognizing a reaL effect than our acceptable $\alpha = 0.05$. It 
+less probability of recognizing a real effect than our acceptable $\alpha = 0.05$. It 
 is even asymmetric with the lowest probability for rejecting the null hypothesis at 
 0.063, slightly higher than the null hypothesis itself. Our test is virtually blind to 
 small changes, only able to reliably detect extreme values like $p < 0.1$ or $p > 0.95$.
