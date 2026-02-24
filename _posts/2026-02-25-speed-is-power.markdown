@@ -52,9 +52,9 @@ To which the Chief Scientist, who has seen things before, sagely comments, "That
 is just a single replication. Is it statistically significant?"
 
 Good question. We pull out the Statistics 101 textbook and flip to the chapter on 
-the binomial hypothesis test. We determine that the _a priori_ probability of 
-"winning" without this new thing is about 0.6. That will do as our null hypothesis. We 
-want to be scientific, so we want a 95 % confidence level, or $\alpha = 0.05$. And the 
+the binomial hypothesis test. We know that the _a priori_ probability of "winning" 
+without this new thing is about 0.6. That will do as our null hypothesis. We want to 
+be scientific, so we want a 95 % confidence level, or $\alpha = 0.05$. And the 
 proponents and detractors of the thing are about equally loud, so we probably need a 
 two-sided test just in case. Our computing resources are still rather limited, so running 
 ten replications is about as much as we can manage. Working out the probabilities, we find 
@@ -86,7 +86,7 @@ concluding in the wrong direction from the actual effect.
 
 Either way, our estimate of $p$ from a "statistically significant outcome" would wildly 
 misjudge the actual effect size, such as $\hat{p} = 10/10 = 1.0$ or $\hat{p} = 2/10 = 
-0.2$ (or even worse). The proponents or the detractors would feel vindicated – 
+0.2$ (or even worse). The proponents (or the detractors) would feel vindicated – 
 "Look, that's what I told you!" – but the result would not be anywhere near true.
 
 We can plot the probability of rejecting the null hypothesis $p = 0.6$ as a function 
