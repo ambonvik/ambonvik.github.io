@@ -47,7 +47,7 @@ comments:
     input_position       : "bottom"
     emit_metadata        : "0"
     lang                 : "en"
-    lazy                 : # true, false # Loading of the comments will be deferred until the user scrolls near the comments container.
+    lazy                 : true
 reCaptcha:
   siteKey                :
   secret                 :

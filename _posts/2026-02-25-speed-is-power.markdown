@@ -39,8 +39,8 @@ ARM Qualcomm CPU.
 Quite literally, we were running large, complex high-stakes simulations on hardware with 
 less than 1 % of the computing power that a ten-year-old wristwatch has today.
 
-Suppose, for the sake of the argument that there is a thing to evaluate. It could 
-be a device, a tactic, a training program - whatever. Suppose also that the main 
+Suppose, for the sake of the argument, that there is a thing to evaluate. It could 
+be a device, a tactic, a training program – whatever. Suppose also that the main 
 outcome metric is a probability, e.g., of "winning" (whatever that means in the 
 relevant scenario). As always, the proponents of the thing claim that it is the 
 greatest thing since the invention of gunpowder, while the detractors think it could 
@@ -69,7 +69,7 @@ Under our null hypothesis, $p = 0.6$, our binomial distribution looks something 
 
 ![binomial_plot.png](../assets/images/binomial_plot.png)
 
-The probability of falsely rejecting the null hypothesis is about 0.02, somewhat less 
+The probability of falsely rejecting the null hypothesis is about 2 %, somewhat less 
 than our target $\alpha = 0.05$ due to the discrete distribution. Including one more 
 bar on either side would bring us above that value. 
 
@@ -80,9 +80,9 @@ sample values is now like this:
 
 ![binomial_actual.png](../assets/images/binomial_actual.png)
 
-There is only about 3 % probability of detecting that this is different from the 
-null hypothesis, and that includes a rather uncomfortable non-zero probability of 
-concluding in the wrong direction from the actual effect.
+There is only about 3 % probability of rejecting the null hypothesis, and that 
+includes a rather uncomfortable non-zero probability of concluding in the wrong 
+direction from the actual effect.
 
 Either way, our estimate of $p$ from a "statistically significant outcome" would wildly 
 misjudge the actual effect size, such as $\hat{p} = 10/10 = 1.0$ or $\hat{p} = 2/10 = 
