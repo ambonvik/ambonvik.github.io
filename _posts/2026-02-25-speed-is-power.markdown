@@ -151,10 +151,7 @@ the day, running such underpowered statistics on underpowered hardware.
 I think the practical approach could best be described as "informally Bayesian." There 
 was not enough power for proper frequentist hypothesis testing of each scenario, but 
 over some time, we ran hundreds of simulations with various parameter values. That 
-gave a keen sense of what was "typical" model outputs and what was most likely a 
+gave a keen sense of what was "typical" model output and what was most likely a 
 statistical fluke. If something looked strange, we would run additional replications 
 and variations around that point in the parameter space to try to understand what was 
-going on.
-
-I still believe that we mostly were able to draw the correct conclusions out of the foggy 
-glass we had available to us.
+going on. I believe we mostly got it right. 
