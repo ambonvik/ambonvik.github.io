@@ -2,9 +2,9 @@
 title: "Speed is (statistical) power"
 date: 2026-02-20  13:32:20 +0300
 description: "Increasing simulation speed by 45x improves the resolution of your 
-simulation microscope"
+simulation microscope."
 excerpt: "Increasing simulation speed by 45x improves the resolution of your 
-simulation microscope"
+simulation microscope."
 mathjax: true
 header:
   overlay_image: /assets/images/speed_wide.png
