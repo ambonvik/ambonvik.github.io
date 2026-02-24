@@ -105,9 +105,10 @@ small changes, only able to reliably detect extreme values like $p < 0.1$ or $p 
 ***
 
 But what if we could, say, implement our simulation model in a programming language that 
-happened to run 45 times faster than this baseline, all else equal? For the same 
-budget of time and computing resources, we would then be able to run 450 replications 
-instead of 10. Our power curve now turns into a precise notch filter, with a 
+happened to run 45 times faster than this baseline, all else equal? 
+
+For the same budget of time and computing resources, we would then be able to run 450 
+replications instead of 10. Our power curve now turns into a precise notch filter, with a 
 near-certain ability to detect any effect larger than 0.1 from our null hypothesis 
 $p = 0.6$. 
 
