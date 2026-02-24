@@ -127,7 +127,7 @@ statistical power and higher analytical resolution.
 This "hypothetical" 45x speed increase is the exact speed difference we have seen when 
 benchmarking discrete event simulation models in C using the Cimba library against 
 equivalent models in Python using SimPy and Python Multiprocessing. The increased 
-statistical power too.
+statistical power follows from that.
 
 One might argue that "well, but we have so much more computing power now, so we can 
 afford to be inefficient and slow." I beg to differ. Analysts (and their clients) will 
