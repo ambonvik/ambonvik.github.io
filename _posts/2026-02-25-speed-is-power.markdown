@@ -84,42 +84,39 @@ There is only about 3 % probability of detecting that this now is _different_ fr
 null hypothesis, and that includes a rather uncomfortable non-zero probability of 
 concluding in the wrong direction from the actual effect.
 
-Either way, our estimate 
-of $p$ from a "statistically significant outcome" would wildly 
+Either way, our estimate of $p$ from a "statistically significant outcome" would wildly 
 misjudge the actual effect size, such as $\hat{p} = 10/10 = 1.0$ or $\hat{p} = 2/10 = 
 0.2$ (or even worse). The proponents or the detractors would feel vindicated – 
 "Look, that's what I told you!" – but the result would not be anywhere near true.
 
-We can plot the probability of rejecting the null hypothesis $p = 0.6$ as a 
-function of the actual (unknown) success probability, as shown in the chart below. 
-This is called a _power curve_, showing the experiment's statistical power to resolve 
+We can plot the probability of rejecting the null hypothesis $p = 0.6$ as a function 
+of the actual (unknown) success probability, as shown in the chart below. This is 
+called a _power curve_, showing the experiment's statistical power to resolve 
 true differences from the null hypothesis. 
 
 ![binomial_power.png](../assets/images/binomial_power.png)
 
-This one is seriously underpowered. Note
-that a wide area between 0.5 and 0.75 has less probability of recognizing a reaL
-effect than our acceptable $\alpha = 0.05$. It is even asymmetric with the lowest
-probability for rejecting the null hypothesis at 0.063, slightly higher than the null
-hypothesis itself. Our test is virtually blind to small changes, only able to
-reliably detect extreme values like $p < 0.1$ or $p > 0.95$.
+This one is seriously underpowered. Note that a wide area between 0.5 and 0.75 has 
+less probability of recognizing a reaL effect than our acceptable $\alpha = 0.05$. It 
+is even asymmetric with the lowest probability for rejecting the null hypothesis at 
+0.063, slightly higher than the null hypothesis itself. Our test is virtually blind to 
+small changes, only able to reliably detect extreme values like $p < 0.1$ or $p > 0.95$.
 
 ***
 
 But what if we could, say, implement our simulation model in a programming language that 
 happened to run 45 times faster than this baseline, all else equal? For the same 
-budget of time and computing resources, 
-we would then be able to run 450 replications instead of 10. Our power curve now turns 
-into a precise notch filter, with a near-certain ability to detect any effect larger 
-than 0.1 from our null hypothesis $p = 0.6$. 
+budget of time and computing resources, we would then be able to run 450 replications 
+instead of 10. Our power curve now turns into a precise notch filter, with a 
+near-certain ability to detect any effect larger than 0.1 from our null hypothesis 
+$p = 0.6$. 
 
 ![power_curve_450_filled.png](../assets/images/power_curve_450_filled.png)
 
 We can also plot the binomial test again for the null hypothesis $p = 0.6$, now with 
 $n = 450$, and plot the sample distribution for an actual $p = 0.7$ in the same chart. 
-This is a value just on the "shoulder" of the power curve. Almost the 
-entire distribution of actual sample values now falls well outside the non-rejection 
-region for our null hypothesis.
+This is a value just on the "shoulder" of the power curve. Almost the entire distribution 
+of actual sample values now falls well outside the non-rejection region for our null hypothesis.
 
 ![binomial_450.png](../assets/images/binomial_450.png)
 
@@ -127,10 +124,10 @@ Our hypothetical 45x faster simulation has changed a blunt and opaque instrument
 a high-powered magnifying glass. The improved speed translates directly into higher 
 statistical power and higher analytical resolution.
 
-This "hypothetical" 45x speed increase is the 
-exact speed difference we have seen when benchmarking discrete event simulation models in 
-C using the Cimba library against equivalent models in Python using SimPy and Python 
-Multiprocessing. The increased statistical power too.
+This "hypothetical" 45x speed increase is the exact speed difference we have seen when 
+benchmarking discrete event simulation models in C using the Cimba library against 
+equivalent models in Python using SimPy and Python Multiprocessing. The increased 
+statistical power too.
 
 One might argue that "well, but we have so much more computing power now, so we can 
 afford to be inefficient and slow." I beg to differ. Analysts (and their clients) will 
@@ -139,10 +136,9 @@ speed becomes a constraint. For example, in my models from around 1990, we model
 airborne sensors as simple pie slices moving in two-dimensional airspace. What if one 
 wanted higher realism, e.g., to model the dynamic three-dimensional sensor coverage  
 from a maneuvering plane and the sensor cones from any approaching missiles, too? And 
-perhaps replace my simple non-linear resource allocation model with 
-something much more sophisticated for a more realistic representation of the human 
-decision maker? Suddenly, the analyst is back to queueing for computer time in the 
-time-honored fashion.
+perhaps replace my simple non-linear resource allocation model with something much more 
+sophisticated for a more realistic representation of the human decision maker? Suddenly, 
+the analyst is back to queueing for computer time in the time-honored fashion.
 
 Speed is indeed (statistical) power.
 
