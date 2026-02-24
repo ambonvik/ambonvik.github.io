@@ -137,7 +137,7 @@ airborne sensors as simple pie slices moving in two-dimensional airspace. What i
 wanted higher realism, e.g., to model the dynamic three-dimensional sensor coverage 
 from a maneuvering plane and the sensor cones from any approaching missiles, too? And 
 perhaps replace my simple non-linear resource allocation model with something much 
-more sophisticated for a more realistic representation of the human decision maker?  
+more sophisticated for a more realistic representation of the human decision maker? 
 Suddenly, the analyst is back to queueing for computer time in the time-honored fashion.
 
 Speed is indeed (statistical) power.
