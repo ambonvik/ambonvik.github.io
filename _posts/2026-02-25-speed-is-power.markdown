@@ -126,7 +126,7 @@ a high-powered magnifying glass. The improved speed translates directly into hig
 statistical power and higher analytical resolution.
 
 This "hypothetical" 45x speed increase is the exact speed difference we have seen when 
-benchmarking discrete event simulation models in C using the Cimba library against 
+benchmarking discrete event simulation models in C using the [Cimba](https://github.com/ambonvik/cimba) library against 
 equivalent models in Python using SimPy and Python Multiprocessing. The increased 
 statistical power follows from that.
 
