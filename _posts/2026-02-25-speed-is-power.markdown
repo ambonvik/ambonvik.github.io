@@ -1,9 +1,8 @@
 ---
 title: "Speed is (statistical) power"
 date: 2026-02-20  13:32:20 +0300
-description: "Increased simulation speed translates to higher number of replications 
-for a given budget of time and computing power, which in turn gives higher statistical 
-power to resolve real effects from random noise"
+description: "Increasing simulation speed by 45x improves the resolution of your 
+simulation microscope"
 excerpt: "Increasing simulation speed by 45x improves the resolution of your 
 simulation microscope"
 mathjax: true
