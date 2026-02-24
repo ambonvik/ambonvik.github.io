@@ -131,26 +131,29 @@ statistical power follows from that.
 
 One might argue that "well, but we have so much more computing power now, so we can 
 afford to be inefficient and slow." I beg to differ. Analysts (and their clients) will 
-always try to include more realistic model features up to a point where computing  
-speed becomes a constraint. For example, in my models from around 1990, we modeled  
+always try to include more realistic model features up to a point where computing 
+speed becomes a constraint. For example, in my models from around 1990, we modeled 
 airborne sensors as simple pie slices moving in two-dimensional airspace. What if one 
-wanted higher realism, e.g., to model the dynamic three-dimensional sensor coverage  
+wanted higher realism, e.g., to model the dynamic three-dimensional sensor coverage 
 from a maneuvering plane and the sensor cones from any approaching missiles, too? And 
-perhaps replace my simple non-linear resource allocation model with something much more 
-sophisticated for a more realistic representation of the human decision maker? Suddenly, 
-the analyst is back to queueing for computer time in the time-honored fashion.
+perhaps replace my simple non-linear resource allocation model with something much 
+more sophisticated for a more realistic representation of the human decision maker?  
+Suddenly, the analyst is back to queueing for computer time in the time-honored fashion.
 
 Speed is indeed (statistical) power.
 
 ***
 
 One may also wonder how we actually were able to draw any conclusions at all back in 
-the day, running such underpowered statistics on underpowered hardware. I think the  
-practical approach could best be described as "informally Bayesian." There was not  
-enough power for proper frequentist hypothesis testing of each scenario, but over time,
-we ran hundreds of simulations with various parameter values. That gave a keen sense  
-of what was "typical" model outputs and what was most likely a statistical fluke. If 
-something looked strange, we would run additional replications and variations around 
-that point in the parameter space to try to understand what was going on. I still 
-believe that we mostly were able to draw the correct conclusions out of the foggy 
-glass we had.
+the day, running such underpowered statistics on underpowered hardware.
+
+I think the practical approach could best be described as "informally Bayesian." There 
+was not enough power for proper frequentist hypothesis testing of each scenario, but 
+over some time, we ran hundreds of simulations with various parameter values. That 
+gave a keen sense of what was "typical" model outputs and what was most likely a 
+statistical fluke. If something looked strange, we would run additional replications 
+and variations around that point in the parameter space to try to understand what was 
+going on.
+
+I still believe that we mostly were able to draw the correct conclusions out of the foggy 
+glass we had available to us.
