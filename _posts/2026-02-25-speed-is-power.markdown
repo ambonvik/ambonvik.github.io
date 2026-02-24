@@ -80,7 +80,7 @@ sample values is now like this:
 
 ![binomial_actual.png](../assets/images/binomial_actual.png)
 
-There is only about 3 % probability of detecting that this now is _different_ from the 
+There is only about 3 % probability of detecting that this is different from the 
 null hypothesis, and that includes a rather uncomfortable non-zero probability of 
 concluding in the wrong direction from the actual effect.
 
