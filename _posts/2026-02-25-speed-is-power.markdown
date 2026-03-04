@@ -54,8 +54,8 @@ To which the Chief Scientist, who has seen things before, sagely comments, "That
 is just a single replication. Is it statistically significant?"
 
 Good question. We pull out the Statistics 101 textbook and flip to the chapter on 
-the binomial hypothesis test. We know that the _a priori_ probability of "winning" 
-without this new thing is about 0.6. That will do as our null hypothesis. We want to 
+the binomial hypothesis test. We happen to know that the _a priori_ probability of 
+"winning" without this new thing is about 0.6. That will do as our null hypothesis. We want to 
 be scientific, so we want a 95 % confidence level, or $\alpha = 0.05$. And the 
 proponents and detractors of the thing are about equally loud, so we probably need a 
 two-sided test just in case. Our computing resources are still rather limited, so running 
