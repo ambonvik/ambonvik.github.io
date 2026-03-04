@@ -33,7 +33,9 @@ with varying numbers of stars on their shoulderpads. No pressure whatsoever.
 
 We were running these simulations on a cluster of VAXstations. These were powerful 
 workstations for their time, providing about 11 MFLOPS from a single CPU 
-core. For comparison, a 2016 Apple Watch gave about 1 200 MFLOPS from its quadcore 
+core.
+
+For comparison, a 2016 Apple Watch gave about 1 200 MFLOPS from its quadcore 
 ARM Qualcomm CPU.
 
 Quite literally, we were running large, complex high-stakes simulations on hardware with 
@@ -96,11 +98,12 @@ true differences from the null hypothesis.
 
 ![binomial_power.png](../assets/images/binomial_power.png)
 
-This one is seriously underpowered. Note that a wide area between 0.5 and 0.75 has 
-less probability of recognizing a real effect than our acceptable $\alpha = 0.05$. It 
-is even asymmetric with the lowest probability for rejecting the null hypothesis at 
-0.063, slightly higher than the null hypothesis itself. Our test is virtually blind to 
-small improvements, only able to reliably detect extreme values like $p < 0.1$ or $p > 0.95$.
+This one is seriously underpowered. Note that a wide area between $p = 0.5$ and $p = 0.
+75$ has less probability of recognizing a real effect than our acceptable $\alpha = 0.05$.
+It is even asymmetric with the lowest probability for rejecting the null hypothesis at 
+$p = 0.063$, slightly higher than the null hypothesis itself. Our test is virtually 
+blind to small improvements, only able to reliably detect extreme values like $p < 0.1$
+or $p > 0.95$.
 
 ***
 
