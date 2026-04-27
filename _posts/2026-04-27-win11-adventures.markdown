@@ -1,7 +1,7 @@
 ---
 title: "Adventures with Windows 11"
 date: 2026-04-27  19:30:20 +0300
-description: "Convincing Windows 11 that coroutines are not a stack-smashing exploit"
+description: "Convincing Windows 11 that coroutines are not a stack-smashing exploit."
 excerpt: "Windows 11 has far stronger stack security than Windows 10, supported by 
 modern CPU hardware capabilities. Coroutines can easily trip up in that."
 mathjax: true
@@ -113,55 +113,73 @@ so I will only review the main points here.
    changing the TIB values. Change them atomically by loading all three values from 
    the old stack to scratch registers before writing them to the TIB with no 
    interleaving stack access. Only then proceed with accessing the new stack.
-*  Do not use `RET` to jump to the new coroutine. The oldest trick in the 
-   hacker book is to overwrite the return address by abusing a buffer overflow on the 
-   stack and then let the program return to a hacker-selected address, potentially 
-   taking full control of the machine. Windows 11 and CET are understandably wary 
-   of anything that looks strange there. Instead, spell it out explicitly by 
-   popping the return address into a scratch register and then jumping to the address 
-   in the register:
+  *  Do not use `RET` to jump to the new coroutine. The oldest trick in the 
+     hacker book is to overwrite the return address by abusing a buffer overflow on the 
+     stack and then let the program return to a hacker-selected address, potentially 
+     taking full control of the machine. Windows 11 and CET are understandably wary 
+     of anything that looks strange there. Instead, spell it out explicitly by 
+     popping the return address into a scratch register and then jumping to the address 
+     in the register:
 
-   ```ASM
-    ;-------------------------------------------------------------------------------
-    ; Push the TIB DeallocationStack, StackLimit, and StackBase entries
-    mov r9, [gs:1478]      ; DeallocationStack
-    push r9
-    mov r9, [gs:16]        ; StackLimit
-    push r9
-    mov r9, [gs:8]         ; StackBase
-    push r9
-    ;
-    ; Store old stack pointer to address given as first argument RCX
-    mov [rcx], rsp
-    ;
-    ; Load the new RSP from the second argument RDX into a scratch register
-    mov r9, [rdx]
-    ;
-    ; Load new stack info into scratch registers for atomic TIB change
-    mov r10, [r9]           ; New StackBase
-    mov r11, [r9 + 8]       ; New StackLimit
-    mov rax, [r9 + 16]      ; New DeallocationStack
-    ;
-    ; Write the new stack info to Windows TIB without touching the stack
-    mov [gs:8], r10         ; Update StackBase
-    mov [gs:16], r11        ; Update StackLimit
-    mov [gs:1478], rax      ; Update DeallocationStack
-    ;
-    ; Done, safe to switch to the new stack, advancing past the used TIB entries
-    mov rsp, r9
-    add rsp, 24
-    ;
-    ; We are now in the new context, restore other registers from the new stack
-    load_context
-    ;
-    ; Load whatever was in the third argument R8 as return value in RAX
-    mov rax, r8
-    ;
-    ; Return to wherever the new context was transferring from earlier
-    ; Note that we spell out the 'ret' as 'pop, jmp' for Intel CET reasons.
-    pop r9
-    jmp r9
-   ```
+     ```ASM
+     ;-------------------------------------------------------------------------------
+     ; Callable function void *cmi_coroutine_context_switch(void **old,
+     ;                                                      void **new,
+     ;                                                      void *ret)
+     ; Arguments:
+     ;   void **old - RCX - address for storing current stack pointer
+     ;   void **new - RDX - address for reading new stack pointer
+     ;   void *ret  - R8  - return value passed from old to new context
+     ; Scratch registers used:
+     ;   R9, R10, R11, RAX
+     ; Return value:
+     ;   void *     - RAX - whatever was given as the third argument
+     ; Error handling:
+     ;   None - the samurai returns victorious or not at all
+     ;
+     cmi_coroutine_context_switch:
+         ; Push all callee-saved registers to current stack
+         save_context
+         ;
+         ; Push the TIB DeallocationStack, StackLimit, and StackBase entries
+         mov r9, [gs:1478]      ; DeallocationStack
+         push r9
+         mov r9, [gs:16]        ; StackLimit
+         push r9
+         mov r9, [gs:8]         ; StackBase
+         push r9
+         ;
+         ; Store old stack pointer to address given as first argument RCX
+         mov [rcx], rsp
+         ;
+         ; Load the new RSP from the second argument RDX into a scratch register
+         mov r9, [rdx]
+         ;
+         ; Load new stack info into scratch registers for atomic TIB change
+         mov r10, [r9]           ; New StackBase
+         mov r11, [r9 + 8]       ; New StackLimit
+         mov rax, [r9 + 16]      ; New DeallocationStack
+         ;
+         ; Write the new stack info to Windows TIB without touching the stack
+         mov [gs:8], r10         ; Update StackBase
+         mov [gs:16], r11        ; Update StackLimit
+         mov [gs:1478], rax      ; Update DeallocationStack
+         ;
+         ; Done, safe to switch to the new stack, advancing past the used TIB entries
+         mov rsp, r9
+         add rsp, 24
+         ;
+         ; We are now in the new context, restore other registers from the new stack
+         load_context
+         ;
+         ; Load whatever was in the third argument R8 as return value in RAX
+         mov rax, r8
+         ;
+         ; Return to wherever the new context was transferring from earlier
+         ; Note that we spell out the 'ret' as 'pop, jmp' for Intel CET reasons.
+         pop r9
+         jmp r9
+     ```
 *  Tell `gcc` not to produce stack-checking code, here in `meson.build`:
    
    ```
