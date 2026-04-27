@@ -17,13 +17,13 @@ Windows support for Cimba, though, so I checked from time to time that it still
 worked on the Xeon as well.
 
 I then set up a GitHub Actions process to automate building and testing Cimba 
-there. Effectively, it runs 'meson build; meson test' on the GitHub runners every time 
-I push a change. The runners are specified as 'latest' both for Linux Ubuntu and Windows.
+there. Effectively, it runs `meson build; meson test on the GitHub runners every time 
+I push a change. The runners are specified as "latest" both for Linux Ubuntu and Windows.
 That presumably implies new hardware and the newest versions of the OS.
 
 It was an unpleasant surprise to see that the Windows test suite now failed all 
-tests that involved coroutines, both directly as in 'test_coroutine.c' and everything 
-built on top of it like 'test_process.c'. Windows 11 promptly killed the executable as 
+tests that involved coroutines, both directly as in `test_coroutine.c` and everything 
+built on top of it like `test_process.c`. Windows 11 promptly killed the executable as 
 soon as it was trying to start a coroutine. The only error message given was a rather 
 terse error code '0xc0000005', access violation.
 
@@ -98,22 +98,28 @@ so I will only review the main points here.
         cmb_assert_always(r != 0);
     }
 ```
-3. There is a third value in the
+3. There is a third value to worry about in the
    [Thread Information Block](https://en.wikipedia.org/wiki/Win32_Thread_Information_Block#Stack_information_stored_in_the_TIB)
-   (TIB) to worry about, the DeallocationStack at `GS:1478`. It contains the raw 
-   memory address returned by `VirtualAlloc()`. As the Wikipedia article states: 
-   "Setting stack limits without setting DeallocationStack will probably cause odd 
+   (TIB), the _DeallocationStack_ at `GS:1478`. It contains the raw 
+   memory address returned by `VirtualAlloc()`. As 
+   [the Wikipedia article](https://en.wikipedia.org/wiki/Win32_Thread_Information_Block#Stack_information_stored_in_the_TIB)
+   states: 
+   _"Setting stack limits without setting DeallocationStack will probably cause odd 
    behavior in SetThreadStackGuarantee. For example, it will overwrite the stack 
-   limits to wrong values." That also needs to be saved and restored on context switches.
-4. In the actual context switch, the CPU gets very afraid if it detects an 
+   limits to wrong values."_
+4. In the actual context switch, the CPU becomes very afraid if it detects an 
    inconsistent state between the stack parameters in the TIB, its CET Shadow Stack, 
    and the actual memory accesses in progress. Wait until the very last moment before 
-   changing the TIB values, then atomically by loading them all to scratch 
-   registers before writing them all, and only then proceed with accessing the new stack.
+   changing the TIB values. Change them atomically by loading all three values from 
+   the old stack to scratch registers before writing them to the TIB with no 
+   interleaving stack access. Only then proceed with accessing the new stack.
 5. Do not use `RET` to jump to the new coroutine. The oldest trick in the 
-   hacker book is to overwrite the return pointer by abusing a buffer overflow on the 
-   stack to hijack control. Instead, spell it out explicitly by popping the return 
-   address into a scratch register and then jumping to the address in the register:
+   hacker book is to overwrite the return address by abusing a buffer overflow on the 
+   stack and then let the program return to a hacker-selected address, potentially 
+   taking full control of the machine. Windows 11 and CET are understandably wary 
+   of anything that looks strange there. Instead, spell it out explicitly by 
+   popping the return address into a scratch register and then jumping to the address 
+   in the register:
 
    ```ASM
     ;-------------------------------------------------------------------------------
