@@ -56,7 +56,7 @@ human trial-and-error testing, I was able to find a set of code clarifications t
 accepted. The complete code is [in the Cimba repo](https://github.com/ambonvik/cimba/tree/main/src/port/x86-64/windows),
 so I will only review the main points here. 
 
-1. Tell it explicitly to expect stack shenanigans. Even if not using any Windows fiber 
+*  Tell it explicitly to expect stack shenanigans. Even if not using any Windows fiber 
    library functions, call `ConvertThreadToFiber(NULL);` to state that here be dragons.
    For extra credit, wrap it in a test where the magic number '0x1e00' means "not a 
    fiber":
@@ -65,12 +65,12 @@ so I will only review the main points here.
         ConvertThreadToFiber(NULL);
    }
    ```
-2. Stack memory is different. Do not simply call `malloc()` or `calloc()` to allocate new 
+*  Stack memory is different. Do not simply call `malloc()` or `calloc()` to allocate new 
    stack memory. Windows 11 expects page-aligned memory allocated by `VirtualAlloc()`
    as valid stack space. After use, it needs to be freed by the matching `VirtualFree()`. 
    Allocate and designate a guard page at the end of the stack.
 
-```C
+   ```C
     /* Allocate memory suitable for a stack */
     unsigned char *cmi_coroutine_stack_alloc(const size_t size,  
                                              unsigned char **base_p,
@@ -97,8 +97,8 @@ so I will only review the main points here.
         int r = VirtualFree(stack, 0, MEM_RELEASE);
         cmb_assert_always(r != 0);
     }
-```
-3. There is a third value to worry about in the
+   ```
+*  There is a third value to worry about in the
    [Thread Information Block](https://en.wikipedia.org/wiki/Win32_Thread_Information_Block#Stack_information_stored_in_the_TIB)
    (TIB), the _DeallocationStack_ at `GS:1478`. It contains the raw 
    memory address returned by `VirtualAlloc()`. As 
@@ -107,13 +107,13 @@ so I will only review the main points here.
    _"Setting stack limits without setting DeallocationStack will probably cause odd 
    behavior in SetThreadStackGuarantee. For example, it will overwrite the stack 
    limits to wrong values."_
-4. In the actual context switch, the CPU becomes very afraid if it detects an 
+*  In the actual context switch, the CPU becomes very afraid if it detects an 
    inconsistent state between the stack parameters in the TIB, its CET Shadow Stack, 
    and the actual memory accesses in progress. Wait until the very last moment before 
    changing the TIB values. Change them atomically by loading all three values from 
    the old stack to scratch registers before writing them to the TIB with no 
    interleaving stack access. Only then proceed with accessing the new stack.
-5. Do not use `RET` to jump to the new coroutine. The oldest trick in the 
+*  Do not use `RET` to jump to the new coroutine. The oldest trick in the 
    hacker book is to overwrite the return address by abusing a buffer overflow on the 
    stack and then let the program return to a hacker-selected address, potentially 
    taking full control of the machine. Windows 11 and CET are understandably wary 
@@ -162,7 +162,7 @@ so I will only review the main points here.
     pop r9
     jmp r9
    ```
-6. Tell `gcc` not to produce stack-checking code:
+*  Tell `gcc` not to produce stack-checking code, here in `meson.build`:
    
    ```
     if host_machine.system() == 'windows'
