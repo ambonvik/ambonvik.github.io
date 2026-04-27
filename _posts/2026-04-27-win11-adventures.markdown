@@ -21,7 +21,7 @@ there. Effectively, it runs `meson build; meson test on the GitHub runners every
 I push a change. The runners are specified as "latest" both for Linux Ubuntu and Windows.
 That presumably implies new hardware and the newest versions of the OS.
 
-It was an unpleasant surprise to see that the Windows test suite now failed all 
+It was an unpleasant surprise to see that the Windows test suite on GitHub failed all 
 tests that involved coroutines, both directly as in `test_coroutine.c` and everything 
 built on top of it like `test_process.c`. Windows 11 promptly killed the executable as 
 soon as it was trying to start a coroutine. The only error message given was a rather 
