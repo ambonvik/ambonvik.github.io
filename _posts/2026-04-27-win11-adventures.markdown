@@ -17,7 +17,7 @@ Windows support for Cimba, though, so I checked from time to time that it still
 worked on the Xeon as well.
 
 I then set up a GitHub Actions process to automate building and testing Cimba 
-there. Effectively, it runs `meson build; meson test on the GitHub runners every time 
+there. Effectively, it runs `meson build; meson test` on the GitHub runners every time 
 I push a change. The runners are specified as "latest" both for Linux Ubuntu and Windows.
 That presumably implies new hardware and the newest versions of the OS.
 
