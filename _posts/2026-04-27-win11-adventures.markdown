@@ -65,39 +65,40 @@ so I will only review the main points here.
         ConvertThreadToFiber(NULL);
    }
    ```
-*  Stack memory is different. Do not simply call `malloc()` or `calloc()` to allocate new 
-   stack memory. Windows 11 expects page-aligned memory allocated by `VirtualAlloc()`
-   as valid stack space. After use, it needs to be freed by the matching `VirtualFree()`. 
-   Allocate and designate a guard page at the end of the stack.
+  *  Stack memory is different. Do not simply call `malloc()` or `calloc()` to allocate new 
+     stack memory. Windows 11 expects page-aligned memory allocated by `VirtualAlloc()`
+     as valid stack space. After use, it needs to be freed by the matching `VirtualFree()`. 
+     Allocate and designate a guard page at the end of the stack.
 
-   ```C
-    /* Allocate memory suitable for a stack */
-    unsigned char *cmi_coroutine_stack_alloc(const size_t size,  
-                                             unsigned char **base_p,
-                                             unsigned char **limit_p)
-    {
-        void *raw = VirtualAlloc(NULL, size, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
-        cmb_assert_always(raw != NULL);
-     
-        DWORD old_protect;
-        VirtualProtect(raw, 4096u, PAGE_READWRITE | PAGE_GUARD, &old_protect);
-     
-        /* The stack grows downwards, the base is at the top, less a few bytes for the OS */
-        *base_p = raw + size - 16u;
-     
-        /* The bottom includes the guard page */
-        *limit_p = raw + 4096u;
-     
-        return raw;
-    }
-     
-    /* Free memory previously allocated for a stack */
-    void cmi_coroutine_stack_free(unsigned char *stack)
-    {
-        int r = VirtualFree(stack, 0, MEM_RELEASE);
-        cmb_assert_always(r != 0);
-    }
-   ```
+     ```C
+      unsigned char *cmi_coroutine_stack_alloc(const size_t size,
+                                           unsigned char **base_p,
+                                           unsigned char **limit_p)
+      {
+          const size_t pagesz = cmi_pagesize();
+          oid *raw = VirtualAlloc(NULL, size + pagesz, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+          cmb_assert_always(raw != NULL);
+    
+          DWORD old_protect;
+          VirtualProtect(raw, pagesz, PAGE_READWRITE | PAGE_GUARD, &old_protect);
+    
+          /* The stack grows downwards; the base is at the top */
+          *base_p = raw + size + pagesz;
+    
+          /* The bottom includes the guard page */
+          *limit_p = raw + pagesz;
+    
+          return raw;
+      }
+
+
+      /* Free memory previously allocated for a stack */
+      void cmi_coroutine_stack_free(unsigned char *stack)
+      {
+          int r = VirtualFree(stack, 0, MEM_RELEASE);
+          cmb_assert_always(r != 0);
+      }
+     ```
 *  There is a third value to worry about in the
    [Thread Information Block](https://en.wikipedia.org/wiki/Win32_Thread_Information_Block#Stack_information_stored_in_the_TIB)
    (TIB), the _DeallocationStack_ at `GS:1478`. It contains the raw 
