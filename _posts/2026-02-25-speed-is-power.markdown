@@ -29,7 +29,7 @@ Our task was to give recommendations to senior decision-makers on important choi
 that could involve billions of dollars in peacetime cost and would have
 life-or-death consequences if the Cold War had turned hot. Moreover, some of these
 choices had their proponents and detractors with strong and vocal opinions, and 
-with varying numbers of stars on their shoulderpads. No pressure whatsoever.
+with varying numbers of stars on their shoulder pads. No pressure whatsoever.
 
 We were running these simulations on a cluster of VAXstations. These were powerful 
 workstations for their time, providing about 11 MFLOPS from a single CPU 
@@ -48,10 +48,10 @@ relevant scenario). As always, the proponents of the thing claim that it is the
 greatest thing since the invention of gunpowder, while the detractors think it could 
 lose us the whole war in an afternoon.
 
-So we load up the simulation, run it... and blue "won"! Success!
+So we load up the simulation, run it ... and blue "won"! Success!
 
 To which the Chief Scientist, who has seen things before, sagely comments, "That 
-is just a single replication. Is it statistically significant?"
+was just a single replication. Is it statistically significant?"
 
 Good question. We pull out the Statistics 101 textbook and flip to the chapter on 
 the binomial hypothesis test. We happen to know that the _a priori_ probability of 
@@ -64,7 +64,7 @@ that we can reject the null hypothesis $p = 0.6$ if we have 0, 1, or 2 successes
 have exactly 10 successes.
 
 So we load up the simulation, run all 10 replications, come back on Monday, and find 8 
-successes. Not a significant result, made nobody happy. Trying again, got 5 the second 
+successes. Not a significant result, made nobody happy. Tried again, got 5 the second 
 time. None the wiser.
 
 Under our null hypothesis, $p = 0.6$, our binomial distribution looks something like this:

@@ -51,7 +51,7 @@ the outline given by Malte Skarupke in his 2013 blog post
 That still works for Windows 10, but Windows 11 on a modern AMD or Intel CPU, perhaps 
 with a hypervisor inbetween, is a very different animal.
 
-With significant assistance from both Google Gemini and Anthropic Claude together with
+With significant assistance from both Google Gemini and Anthropic Claude, together with
 human trial-and-error testing, I was able to find a set of code clarifications that was
 accepted. The complete code is [in the Cimba repo](https://github.com/ambonvik/cimba/tree/main/src/port/x86-64/windows),
 so I will only review the main points here. 
@@ -68,7 +68,7 @@ so I will only review the main points here.
   *  Stack memory is different. Do not simply call `malloc()` or `calloc()` to allocate new 
      stack memory. Windows 11 expects page-aligned memory allocated by `VirtualAlloc()`
      as valid stack space. After use, it needs to be freed by the matching `VirtualFree()`. 
-     Allocate and designate a guard page at the end of the stack.
+     Allocate and designate a guard page at the end of the stack with `VirtualProtect()`.
 
      ```C
       unsigned char *cmi_coroutine_stack_alloc(const size_t size,
