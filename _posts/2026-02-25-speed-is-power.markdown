@@ -128,10 +128,11 @@ Our hypothetical 45x faster simulation has changed a blunt and opaque instrument
 a high-powered magnifying glass. The improved speed translates directly into higher 
 statistical power and higher analytical resolution.
 
-This "hypothetical" 45x speed increase is the exact speed difference we have seen when 
+This "hypothetical" 45x speed increase is the exact speed difference we first saw when 
 benchmarking discrete event simulation models in C using the [Cimba](https://github.com/ambonvik/cimba) library against 
 equivalent models in Python using SimPy and Python Multiprocessing. The increased 
-statistical power follows from that.
+statistical power follows from that. Later, we improved the Cimba speed to 70 times 
+faster than SimPy, strengthening this case even further.
 
 One might argue that "Well, but we have so much more computing power now, so we can 
 afford to be inefficient and slow." I beg to differ. Analysts (and their clients) will 
